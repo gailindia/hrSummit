@@ -1,14 +1,14 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hrsummit/constants/app_constants.dart';
+import 'package:hrsummit/utils/app_constants.dart';
+import 'package:hrsummit/utils/colors.dart';
 import 'package:hrsummit/utils/helper.dart';
 import 'package:hrsummit/utils/loader.dart';
 import 'package:hrsummit/utils/viewModel.dart'; 
  
  
 class MyAppBackGroundVM<VIEW_MODEL extends ViewModel> extends StatefulWidget {
- 
   final Widget child;
 
   const MyAppBackGroundVM({
@@ -48,7 +48,8 @@ class _MyAppBackGroundVMState<VIEW_MODEL extends ViewModel>
               height: double.infinity,
               width: double.infinity,
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(bgImage), fit: BoxFit.cover),
+                color: Mytheme.white
+                // image: DecorationImage(image: AssetImage(bgImage), fit: BoxFit.cover),
               ), 
               child: widget.child,
             ),

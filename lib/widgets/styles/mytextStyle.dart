@@ -30,7 +30,7 @@ class MyStyle extends Font {
     _textStyle = _textStyle.copyWith(
       fontFamily: 'Arial Rounded MT Bold',
       fontWeight: FontWeight.w500,
-      color: color ?? Mytheme.black,
+      color: color ?? Mytheme.brown,
     );
   }
  

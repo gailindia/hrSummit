@@ -3,7 +3,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:hrsummit/constants/app_constants.dart'; 
+import 'package:hrsummit/utils/app_constants.dart'; 
 
 class LogoWidget extends StatelessWidget {
   final double? width, height;

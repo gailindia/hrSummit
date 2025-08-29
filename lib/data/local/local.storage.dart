@@ -10,16 +10,12 @@ class LocalStorage {
   static FlutterSecureStorage localStorage =   FlutterSecureStorage();
 
  static Future<void> saveUserDetails(
-  // String username,String password,
-  String empNo,
-  // String dept,String name,String designation
+  String username,String companyName,
+  String designation, 
   ) async {
-    // await localStorage.write(key: 'username', value: username);
-    // await localStorage.write(key: 'password', value: password);
-    await localStorage.write(key: 'empNo', value: empNo);
-    // await localStorage.write(key: 'dept', value: dept);
-    // await localStorage.write(key: 'name', value: name);
-    // await localStorage.write(key: 'designation', value: designation);
+    await localStorage.write(key: 'username', value: username); 
+    await localStorage.write(key: 'companyName', value: companyName);
+    await localStorage.write(key: 'designation', value: designation); 
   }
  
   static Future<void> setToken(String token) async {

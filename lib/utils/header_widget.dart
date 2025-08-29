@@ -1,61 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:hrsummit/constants/app_constants.dart';
-import 'package:hrsummit/utils/colors.dart';
-import 'package:hrsummit/widgets/styles/mytextStyle.dart'; 
-
+import 'package:hrsummit/utils/app_constants.dart'; 
 class HeaderWidget extends StatelessWidget {
-  final bool isIconVisible;
-  final VoidCallback onMenuTap;
-  final VoidCallback onProfileTap;
+ 
 
   const HeaderWidget({
-    super.key,
-    required this.onMenuTap,
-    required this.onProfileTap,
-    this.isIconVisible = false,
+    super.key 
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-    
-      child: Column(
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-         
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              (isIconVisible)
-                  ? GestureDetector(
-                      onTap: onMenuTap,
-                      child: const Icon(Icons.menu, size: 28),  
-                    )
-                  : const SizedBox.shrink(),
-           
-              Image.asset(
-                kIconLogo,
-                height: 54,
-                width: 80,
-                fit: BoxFit.contain,
-              ),
-          
-               
-              (isIconVisible)
-                  ? GestureDetector(
-                      onTap: onProfileTap,
-                      child: const CircleAvatar(
-                        radius: 20,
-                        backgroundImage:
-                            AssetImage(userimg),  
-                        backgroundColor: Colors.grey,
-                      ),
-                    )
-                  : const SizedBox.shrink(), 
-            ],
-          ),
-           const SizedBox(height: 10),
-          Text("Learning and Development (L&D)",style: MyStyle.medium5(Mytheme.orng).s18,)
+          Image.asset(kIconLogo, height: 60, width: 90, fit: BoxFit.contain),
+          Image.asset(khrimgLogo, height: 75, width: 70, fit: BoxFit.contain),
         ],
       ),
     );

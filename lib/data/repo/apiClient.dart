@@ -1,6 +1,6 @@
  
 import 'package:dio/dio.dart';
-import 'package:hrsummit/constants/app_constants.dart';
+import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/data/local/local.storage.dart'; 
  
 

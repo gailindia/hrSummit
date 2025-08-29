@@ -1,8 +1,7 @@
- 
-
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:hrsummit/utils/app_constants.dart';
+import 'package:hrsummit/data/model/verifyotp_respModel.dart';
 import 'package:hrsummit/data/model/login_respModel.dart';
  
  
@@ -15,16 +14,29 @@ class EndPointRepository {
  
 
   /// Login service
-  Future<LoginRespDTO> loginService({
-     required String userEmail, required String pass}) async {
-      log("loginService $userEmail  pass $pass");
-    var data = {"USERID": userEmail, "PASSWORD": pass};
+  Future<LoginRespDto> loginService({
+     required String mobile}) async {
+      // log("loginService $userEmail  pass $pass");
+    var data = {"mobile": mobile};
 
     final response = await client.post(
-      "UserLogin",
+      loginUrl,
       data: data,
     );
-    return LoginRespDTO.fromJson(response.data);
+    return LoginRespDto.fromJson(response.data);
+  }
+  
+  /// otp service
+  Future<VerifyOtpRespDto> otpService({required String mobile,
+     required String otp}) async {
+      // log("otpService $userEmail  pass $pass");
+    var data = {"mobile": mobile, "OTP": otp};
+
+    final response = await client.post(
+      verifyOtpUrl,
+      data: data,
+    );
+    return VerifyOtpRespDto.fromJson(response.data);
   }
 
 

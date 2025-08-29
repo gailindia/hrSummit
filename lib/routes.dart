@@ -13,14 +13,14 @@ class RouteHelper {
       SplashScreen.route: (_) => const SplashScreen(),
       
 
-      // LoginScreen.route: (_) => ChangeNotifierProvider(
-      //       create: (_) => LoginModel(),
-      //       child: const LoginScreen(),
-      //     ),
-      // Homescreen.route: (_) => ChangeNotifierProvider(
-      //       create: (_) => HomeModel(),
-      //       child: const Homescreen(),
-      //     ),
+      LoginScreen.route: (_) => ChangeNotifierProvider(
+            create: (_) => LoginModel(),
+            child: const LoginScreen(),
+          ),
+      Homescreen.route: (_) => ChangeNotifierProvider(
+            create: (_) => HomeModel(),
+            child: const Homescreen(),
+          ),
   
        
 

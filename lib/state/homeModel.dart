@@ -9,12 +9,13 @@
 // import 'package:learning_app/data/model/upcomingTraining_respModel.dart';
 // import 'package:learning_app/data/repo/apiClient.dart';
 // import 'package:learning_app/data/repo/repository.dart';
-// import 'package:learning_app/utils/helper.dart'; 
-// import 'package:learning_app/utils/viewModel.dart';
+// import 'package:learning_app/utils/helper.dart';  
 // import 'package:path_provider/path_provider.dart';
 // import 'package:permission_handler/permission_handler.dart'; 
 
-// class HomeModel extends ViewModel {
+import 'package:hrsummit/utils/viewModel.dart';
+
+class HomeModel extends ViewModel {
 //   final ApiClient apiClient = ApiClient();
 //   String totalDays= "0";
 //   String pDays= "0";
@@ -314,4 +315,4 @@
 //   //       // updateAppDialog(context : Get.context!, storeLink: _storeLink);
 //   //     }
 //   //   }
-// }
+}

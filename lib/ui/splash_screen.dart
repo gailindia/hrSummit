@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hrsummit/constants/app_constants.dart';
+import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/ui/login_screen.dart';
+import 'package:hrsummit/utils/colors.dart';
 import 'package:hrsummit/utils/helper.dart';
 import 'package:hrsummit/widgets/logowidget.dart'; 
  
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 4),
       () => {
         // checkLogin(),
-        // Helper.goToNext(LoginScreen.route)
+        Helper.goToNext(LoginScreen.route)
         // Helper.goToNext(Homescreen.route)
       },
     );
@@ -34,65 +35,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {  
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(bgImage),fit: BoxFit.cover)
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(child: LogoWidget())
-        // Center(
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: [
-        //       const LogoWidget(height: 120,),
-        //       SizedBox(height: 12),
-        //       // Column(
-        //       //   children: [
-        //       //     Center(
-        //       //       child: Text(
-        //       //         kAppName,
-        //       //         maxLines: 2,
-        //       //         // style: GoogleFonts.hind(
-        //       //         //   textStyle: Theme.of(context).textTheme.headlineMedium,
-        //       //         //   fontSize: 25,
-        //       //         //   color: Colors.white,
-        //       //         //   fontWeight: FontWeight.w700,
-        //       //         //   fontStyle: FontStyle.normal,
-        //       //         // ),
-        //       //       ),
-        //       //     ),
-        //       //     Center(
-        //       //       child: Text(
-        //       //         kWorkPermit,
-        //       //         maxLines: 2,
-        //       //         // style: GoogleFonts.hind(
-        //       //         //   textStyle: Theme.of(context).textTheme.headlineMedium,
-        //       //         //   fontSize: 25,
-        //       //         //   color: Colors.white,
-        //       //         //   fontWeight: FontWeight.w700,
-        //       //         //   fontStyle: FontStyle.normal,
-        //       //         // ),
-        //       //       ),
-        //       //     ),
-        //       //     Center(
-        //       //       child: Text(
-        //       //         kAppNamelast,
-        //       //         maxLines: 2,
-        //       //         // style: GoogleFonts.hind(
-        //       //         //   textStyle: Theme.of(context).textTheme.headlineMedium,
-        //       //         //   fontSize: 25,
-        //       //         //   color: Colors.black87,
-        //       //         //   fontWeight: FontWeight.w700,
-        //       //         //   fontStyle: FontStyle.normal,
-        //       //         // ),
-        //       //       ),
-        //       //     ),
-        //       //   ],
-        //       // ), //style: textStyle24Bold),
-           
-        //     ],
-        //   ),
-        // ),
+      color: Mytheme.white,
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(image: AssetImage(kIconLogo), fit: BoxFit.cover)
+      // ), 
+      child: Center(
+        child: LogoWidget(),
       ),
     );
   }
