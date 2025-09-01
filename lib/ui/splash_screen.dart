@@ -1,8 +1,15 @@
+ 
 import 'package:flutter/material.dart'; 
+ 
+import 'package:flutter/material.dart';
+import 'package:hrsummit/ui/quiz/quiz_list.dart';
+import 'package:hrsummit/utils/app_constants.dart'; 
 import 'package:hrsummit/ui/login_screen.dart';
 import 'package:hrsummit/utils/colors.dart';
 import 'package:hrsummit/utils/helper.dart';
-import 'package:hrsummit/widgets/logowidget.dart'; 
+import 'package:hrsummit/widgets/logowidget.dart';
+
+import 'home/homeScreen.dart';
  
 
 class SplashScreen extends StatefulWidget {
@@ -23,8 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 4),
       () => {
         // checkLogin(),
-        Helper.goToNext(LoginScreen.route)
+        // Helper.goToNext(LoginScreen.route)
         // Helper.goToNext(Homescreen.route)
+        Helper.goToNext(QuizListScreen.route)
       },
     );
   } 

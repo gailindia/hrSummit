@@ -1,18 +1,14 @@
- 
 import 'package:dio/dio.dart';
 import 'package:hrsummit/utils/app_constants.dart';
-import 'package:hrsummit/data/local/local.storage.dart'; 
- 
+import 'package:hrsummit/data/local/local.storage.dart';
 
 class ApiClient {
   static String token = "";
- 
- 
 
   Dio init() {
     Dio dio = Dio();
     dio.interceptors.add(ApiInterceptors());
-    dio.options.baseUrl = baseUrl; 
+    dio.options.baseUrl = baseUrl;
     dio.options.connectTimeout = const Duration(seconds: 60);
     dio.options.receiveTimeout = const Duration(seconds: 60);
 
@@ -49,7 +45,7 @@ class ApiInterceptors extends Interceptor {
     //   showFlutterToast(message: "acntBlock".tr());
     //   LocalStorage.removeUserToken();
     //   Helper.goToRemoveUntil(LoginScreen.route);
-    // } 
+    // }
     // else if (err.message!.contains("422")) {
     //   showFlutterToast(message: "Validationerror".tr());
     // }

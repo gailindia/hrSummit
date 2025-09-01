@@ -4,9 +4,18 @@ const String kAppNamelast = "";
 const String kIconLogo = 'assets/images/gail_logo.png'; 
 const String khrimgLogo = 'assets/images/hrimg.png'; 
 const String notifIcon = 'assets/images/notif.png'; 
-const String day1Agenda = 'assets/images/Day1Agenda.png'; 
-const String day2Agenda = 'assets/images/Day2Agenda.png'; 
-const String arrowback = 'assets/images/arrowback.png'; 
+const String day1Agenda = 'assets/images/Day1Agenda.png';
+
+const String arrowback = 'assets/images/arrowback.png';
+
+const String day2Agenda = 'assets/images/Day2Agenda.png';
+const String quiz = 'assets/images/quiz_image.png';
+const String activeQuiz = 'assets/images/active_quiz.png';
+const String question = 'assets/images/question.png';
+const String quizQuestion = 'assets/images/quiz_question.png';
+const String archivedQuiz = 'assets/images/archived_quize.png';
+
+ 
 
  
 const String kAttached = 'Attached';
@@ -30,7 +39,12 @@ const String baseUrl = "https://gailebank.gail.co.in/hrSummit/api/HR_Submit/";
 const String baseImg = "https://gailebank.gail.co.in/HRSummit_Docs/";
 const String loginUrl = "HR_Submit_Login_OTP_aud"; 
 const String verifyOtpUrl = "HR_Submit_Verify_OTP_aud"; 
+ 
 const String submitTagsUrl = "HR_Submit_Tags_Icon"; 
 const String marqueUrl = "HR_Submit_Marquee"; 
 const String delegateUrl = "HR_Submit_Delegate"; 
-const String dignitariesUrl = "HR_Submit_Dignitaries"; 
+const String dignitariesUrl = "HR_Submit_Dignitaries";  
+const String quizListUrl = "HR_Submit_QUIZ_MASTER";
+const String quizQuestionUrl = "HR_Submit_QUIZ_QUESTION";
+const String archiveQuizUrl = "HR_Submit_QUIZ_QUESTION_ARCHIVE";
+const String submitQuizUrl = "HR_Submit_QUIZ_Response"; 
