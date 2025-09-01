@@ -40,18 +40,18 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) { 
     return MyAppBackGroundVM<HomeModel>(
       child: Consumer<HomeModel>(
-        builder: (context, provider, child) {  
+        builder: (context, provider, child) {
           return Scaffold(
             backgroundColor: Colors.transparent,
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  HeaderWidget( 
+                  HeaderWidget(
                   ),
                    SizedBox(height: 8),
                    Container(
                     padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-                    color: Mytheme.greyLight,
+                      color: Mytheme.greyLight,
                      child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -67,15 +67,15 @@ class _HomescreenState extends State<Homescreen> {
                    children: [
                      Image.asset(day1Agenda,),
                      Image.asset(day2Agenda,),
-                   ], 
+                   ],
                    ),
                    SizedBox(height: 10),
- 
-                 
-                 
 
-                  
- 
+
+
+
+
+
                 ],
               ),
             ),
