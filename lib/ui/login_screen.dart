@@ -153,20 +153,20 @@ class _LoginScreenState extends State<LoginScreen> {
               CommonButton(
                 margin: 25,
                 onPressed: () {
-                  // if (context
-                  //         .read<LoginModel>()
-                  //         .userIDController
-                  //         .text
-                  //         .trim()
-                  //         .isNotEmpty) {
-                  //           context.read<LoginModel>().callLoginApi();
-                  //           context.read<LoginModel>().onLoginSuccess = () {
-                  //            setState(() {
-                  //   showOtpSection = true;
-                  // });
-                  //           }; 
-                  // }
-                  Helper.goToNext(Homescreen.route);
+                  if (context
+                          .read<LoginModel>()
+                          .userIDController
+                          .text
+                          .trim()
+                          .isNotEmpty) {
+                            context.read<LoginModel>().callLoginApi();
+                            context.read<LoginModel>().onLoginSuccess = () {
+                             setState(() {
+                    showOtpSection = true;
+                  });
+                    }; 
+                  }
+                  // Helper.goToNext(Homescreen.route);
                   // Helper.goToNext(DelegateScreen.route);
                   // Helper.goToNext(DignitariesScreen.route);
                 },

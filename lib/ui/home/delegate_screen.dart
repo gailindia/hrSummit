@@ -92,7 +92,7 @@ class DelegateScreen extends StatefulWidget {
                       _onSearchChanged(value);
                     },
                     decoration: InputDecoration(
-                      hintText: "Search delegates..***",
+                      hintText: "Search delegates",
                       prefixIcon: Icon(Icons.search),
                       suffixIcon: _searchController.text.isNotEmpty
                           ? IconButton(

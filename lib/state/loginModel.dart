@@ -110,6 +110,7 @@ class LoginModel extends ViewModel{
            userIDController.text.trim(),
           res.designation ?? ""
         );
+        await LocalStorage.setToken(res.token ?? "");
 
         // Helper.goToRemoveUntil(Homescreen.route);
         // await LocalStorage.saveUserRole(response.responseBody?.role.toString());

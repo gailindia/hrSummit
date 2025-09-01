@@ -9,12 +9,14 @@ import '../utils/colors.dart';
 
 class QuizCard extends StatelessWidget {
   final String quizName;
+  final String quizStatus;
   final VoidCallback onStart;
 
   const QuizCard({
     Key? key,
     required this.quizName,
     required this.onStart,
+    required this.quizStatus,
   }) : super(key: key);
 
   @override
@@ -61,8 +63,10 @@ class QuizCard extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: GestureDetector(
               onTap: onStart,
-              child: const Text(
-                "Start",
+              child:   Text(
+               quizStatus != "P" 
+                ? "Start"
+                : "View",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,

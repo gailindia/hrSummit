@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hrsummit/state/quizListModel.dart';
+import 'package:hrsummit/ui/home/homeScreen.dart';
 import 'package:hrsummit/ui/quiz/archived_%20quiz_screen.dart';
 import 'package:hrsummit/ui/quiz/quiz_screen.dart';
 import 'package:hrsummit/utils/viewModel.dart';
@@ -45,6 +46,9 @@ class _QuizListScreenState extends State<QuizListScreen> {
                 HeaderWidget(),
                 CommonAppbar(
                   title: "QUIZ",
+                  onBack: () {
+                    Helper.goToRemoveUntil(Homescreen.route);
+                  },
                   
                 ),
                 SingleChildScrollView(
@@ -84,6 +88,8 @@ class _QuizListScreenState extends State<QuizListScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: QuizCard(
                                 quizName: provider.upCTrainingResult.data![index].qUIZNAME!,
+                                quizStatus: provider.upCTrainingResult.data![index].tYPE!,
+                               
                                 onStart: () {
                                   print("Quiz Started!");
                                   Helper.goToNext(
@@ -123,17 +129,18 @@ class _QuizListScreenState extends State<QuizListScreen> {
                             ],
                           ),
                           ListView.builder(
-                            shrinkWrap: true, // ✅ important
-                            physics: const NeverScrollableScrollPhysics(), // ✅ let parent scroll
+                            shrinkWrap: true,  
+                            physics: const NeverScrollableScrollPhysics(),  
                             itemCount: provider.ArcheiveQuesResult.data?.length ?? 0,
                             itemBuilder: (BuildContext context, int index) => Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: QuizCard(
                                 quizName: provider.ArcheiveQuesResult.data![index].qUIZNAME!,
+                                 quizStatus: provider.ArcheiveQuesResult.data![index].tYPE!,
                                 onStart: () {
                                   print("Quiz Started!");
                                   Helper.goToNext(
-                                    QuizScreen.route,
+                                    ArchiveQuesScreen.route,
                                     argument:
                                     "${provider.ArcheiveQuesResult.data![index].qUIZID!}",
                                   );

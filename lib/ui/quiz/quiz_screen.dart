@@ -63,7 +63,7 @@ class _quizScreenState extends State<QuizScreen> {
                 CommonAppbar(
                   title: "QUIZ",
                   onBack: () {
-                    Helper.goToNext(QuizListScreen.route);
+                    Helper.goToRemoveUntil(QuizListScreen.route);
                   },
                 ),
                 Image.asset(quizQuestion),
