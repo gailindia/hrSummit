@@ -4,7 +4,9 @@ const String kAppNamelast = "";
 const String kIconLogo = 'assets/images/gail_logo.png'; 
 const String khrimgLogo = 'assets/images/hrimg.png'; 
 const String notifIcon = 'assets/images/notif.png'; 
+const String loginimg = 'assets/images/loginimg.png'; 
 const String day1Agenda = 'assets/images/Day1Agenda.png';
+const String footer = "assets/images/footer_copy.png";
 
 const String arrowback = 'assets/images/arrowback.png';
 
@@ -44,6 +46,7 @@ const String submitTagsUrl = "HR_Submit_Tags_Icon";
 const String marqueUrl = "HR_Submit_Marquee"; 
 const String delegateUrl = "HR_Submit_Delegate"; 
 const String dignitariesUrl = "HR_Submit_Dignitaries";  
+const String tabContentUrl = "HR_Submit_Tab_Content";    
 const String quizListUrl = "HR_Submit_QUIZ_MASTER";
 const String quizQuestionUrl = "HR_Submit_QUIZ_QUESTION";
 const String archiveQuizUrl = "HR_Submit_QUIZ_QUESTION_ARCHIVE";

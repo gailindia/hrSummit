@@ -13,7 +13,7 @@ class LoginModel extends ViewModel{
 
  
   VoidCallback? onLoginSuccess;
-  VoidCallback? onRememberSuccess; 
+  VoidCallback? onVerifySuccess; 
   AppValidation validation = AppValidation();
   TextEditingController userIDController = TextEditingController();
   TextEditingController otpController = TextEditingController();
@@ -87,7 +87,7 @@ class LoginModel extends ViewModel{
         // );
         // Helper.goToRemoveUntil(Homescreen.route);
         // await LocalStorage.saveUserRole(response.responseBody?.role.toString());
-        // onLoginSuccess?.call();
+        onLoginSuccess?.call();
       } else {
         onError?.call(res.message ?? 'Login failed');
       }
@@ -109,9 +109,10 @@ class LoginModel extends ViewModel{
            res.company ?? "",
           res.designation ?? ""
         );
+
         // Helper.goToRemoveUntil(Homescreen.route);
         // await LocalStorage.saveUserRole(response.responseBody?.role.toString());
-        onLoginSuccess?.call();
+        onVerifySuccess?.call();
       } else {
         onError?.call(res.message ?? 'Verification failed');
       }

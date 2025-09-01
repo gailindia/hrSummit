@@ -30,9 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 4),
       () => {
         // checkLogin(),
-        // Helper.goToNext(LoginScreen.route)
+        Helper.goToNext(LoginScreen.route)
         // Helper.goToNext(Homescreen.route)
-        Helper.goToNext(QuizListScreen.route)
+        // Helper.goToNext(QuizListScreen.route)
       },
     );
   } 

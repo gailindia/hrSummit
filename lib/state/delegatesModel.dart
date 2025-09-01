@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hrsummit/data/model/delegates_respModel.dart';
 import 'package:hrsummit/data/repo/apiClient.dart';
 import 'package:hrsummit/data/repo/repository.dart';
@@ -22,7 +24,7 @@ class DelegatesModel extends ViewModel {
       final repository = EndPointRepository(client: apiClient.init());
       final response = await repository.getDelegateService();
       delegRespDto = response.data;
-      // log("upCTrainingResult length ${upCTrainingResult.length}");
+      log("upCTrainingResult length ${delegRespDto.length}");
     });
   }
 }

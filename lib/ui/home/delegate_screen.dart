@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hrsummit/data/model/delegates_respModel.dart';
 import 'package:hrsummit/state/delegatesModel.dart';
@@ -29,14 +31,15 @@ class DelegateScreen extends StatefulWidget {
         filteredList = viewModel.delegRespDto;  
       });
       });
-      _searchController.addListener(_onSearchChanged);
+      // _searchController.addListener(_onSearchChanged);
       super.initState();
     }
 
 
-      void _onSearchChanged() {
+      void _onSearchChanged(String value) {
     final provider = context.read<DelegatesModel>();
-    final query = _searchController.text.toLowerCase();
+    final query = value.toLowerCase();
+    log("Search query: $query");
 
     if (query.isEmpty) {
       setState(() {
@@ -45,10 +48,13 @@ class DelegateScreen extends StatefulWidget {
     } else {
       setState(() {
         filteredList = provider.delegRespDto
-            .where((item) =>
-            item.nAME!.toLowerCase().contains(query) ||
-            item.dESIGNATION!.toLowerCase().contains(query))
+            .where((item) {
+              log("item name and query :: $query ${item.nAME}");
+              return item.nAME!.toLowerCase().contains(query);
+            })
             .toList();
+
+       log("filteredList :: ${filteredList.length}");     
       });
     }
   }
@@ -66,9 +72,7 @@ class DelegateScreen extends StatefulWidget {
       return MyAppBackGroundVM<DelegatesModel>(
         child: Consumer<DelegatesModel>(
           builder: (context, provider, child) {
-            if(provider.delegRespDto.isEmpty) {
-              return Center(child: Text("No delegates found"));
-            }
+         
             return Scaffold(
               backgroundColor: Colors.transparent,
               body: Column(
@@ -77,23 +81,25 @@ class DelegateScreen extends StatefulWidget {
                     ), 
                     CommonAppbar(
                       title: "Delegates",
-                      onBack: () {
-                        
-                      },
+                      
                     ),
-                    Padding(
+                  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   child: TextField(
                     controller: _searchController,
+                    onChanged: (value) {
+                      log("message: $value");
+                      _onSearchChanged(value);
+                    },
                     decoration: InputDecoration(
-                      hintText: "Search delegates...",
+                      hintText: "Search delegates..***",
                       prefixIcon: Icon(Icons.search),
                       suffixIcon: _searchController.text.isNotEmpty
                           ? IconButton(
                               icon: Icon(Icons.clear),
                               onPressed: () {
                                 _searchController.clear();
-                                _onSearchChanged(); // reset list
+                                // _onSearchChanged(); // reset list
                               },
                             )
                           : null,
@@ -103,10 +109,10 @@ class DelegateScreen extends StatefulWidget {
                     ),
                   ),
                 ),
-                  ContactListPage(listDelegate: provider.delegRespDto),
-                ],
-              ),
-      
+                ContactListPage(listDelegate: provider.delegRespDto),
+              ],
+            ),
+
     );
   })
     );

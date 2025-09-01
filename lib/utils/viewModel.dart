@@ -95,6 +95,48 @@ class ViewModel extends ChangeNotifier {
       }
     });
   }
+//  Future<void> callApi(
+//   AsyncCallback api, {
+//   bool showLoading = true,
+//   VoidCallback? onSuccess,
+//   Function(String)? onError,
+// }) async {
+//   bool localLoading = false; // 👈 local per-API loading
+
+//   if (localLoading) return;
+//   if (showLoading) localLoading = true;
+
+//   _lastError = null;
+
+//   try {
+//     await api();
+//     if (showLoading) localLoading = false;
+//     onSuccess?.call();
+//   } catch (error, stackTrace) {
+//     if (showLoading) localLoading = false;
+
+//     String errorMessage;
+//     if (error is SocketException) {
+//       errorMessage = networkErrorMessage;
+//     } else if (error is FormatException) {
+//       errorMessage = "Invalid data format: ${error.message}";
+//     } else if (error is HttpException) {
+//       errorMessage = error.message;
+//     } else if (error is TimeoutException) {
+//       errorMessage = timeoutErrorMessage;
+//     } else {
+//       errorMessage = genericErrorMessage;
+//     }
+
+//     _lastError = errorMessage;
+//     onError?.call(errorMessage);
+
+//     if (kDebugMode) {
+//       print('Error in ViewModel: $error');
+//       print('Stack trace: $stackTrace');
+//     }
+//   }
+// }
 
   /// Safely notifies listeners if the view model is still mounted
   void callNotify() {

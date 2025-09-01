@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hrsummit/utils/app_constants.dart';
-import 'package:hrsummit/utils/colors.dart'; 
+import 'package:hrsummit/utils/colors.dart';
+
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({
-    super.key 
-  });
+  const HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +20,30 @@ class HeaderWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(kIconLogo, height: 50, width: 70, fit: BoxFit.contain),
-          Image.asset(khrimgLogo, height: 60, width: 50, fit: BoxFit.contain),
+          Image.network(
+            "${baseImg}Home/gail-logo.png",
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Image.asset(
+                kIconLogo,
+                height: 50,
+                width: 70,
+                fit: BoxFit.contain,
+              );
+            },
+          ),
+          Image.network(
+            "${baseImg}Home/hr-summit.png",
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Image.asset(
+                khrimgLogo,
+                height: 60,
+                width: 50,
+                fit: BoxFit.contain,
+              );
+            },
+          ),
         ],
       ),
     );

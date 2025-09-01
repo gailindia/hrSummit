@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:hrsummit/utils/app_constants.dart';
 
 class DynamicCarousel extends StatefulWidget {
   const DynamicCarousel({super.key});
@@ -12,9 +13,19 @@ class _DynamicCarouselState extends State<DynamicCarousel> {
    
   
   final List<String> imageList = [
-    "assets/images/carousal1.png",
-    "assets/images/carousal1.png",
-    "assets/images/carousal1.png",
+    // "assets/images/carousal1.png",
+    // "assets/images/carousal1.png",
+    // "assets/images/carousal1.png",
+   "${baseImg}Carousel/carousel-img1.png",
+    "${baseImg}Carousel/carousel-img2.png",
+    "${baseImg}Carousel/carousel-img3.png",
+    "${baseImg}Carousel/carousel-img4.png",
+    "${baseImg}Carousel/carousel-img5.png",
+    "${baseImg}Carousel/carousel-img6.png",
+    "${baseImg}Carousel/carousel-img7.png",
+    "${baseImg}Carousel/carousel-img8.png",
+    "${baseImg}Carousel/carousel-img9.png",
+    "${baseImg}Carousel/carousel-img10.png",
   ];
 
   int _currentIndex = 0;
@@ -39,10 +50,16 @@ class _DynamicCarouselState extends State<DynamicCarousel> {
           items: imageList.map((item) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
+              child: Image.network(
                 item,
                 fit: BoxFit.cover,
                 width: double.infinity,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(
+                        Icons.image_not_supported_outlined,
+                        color: Colors.grey, 
+                      );
+                },
               ),
             );
           }).toList(),

@@ -4,9 +4,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:hrsummit/data/model/homeIcon_respModel.dart';
+import 'package:hrsummit/state/homeModel.dart';
+import 'package:hrsummit/ui/home/delegate_screen.dart';
+import 'package:hrsummit/ui/home/dignitaries_screen.dart';
+import 'package:hrsummit/ui/home/image_screen.dart';
 import 'package:hrsummit/utils/app_constants.dart';
-import 'package:hrsummit/utils/colors.dart'; 
-import 'package:hrsummit/widgets/styles/mytextStyle.dart'; 
+import 'package:hrsummit/utils/colors.dart';
+import 'package:hrsummit/utils/helper.dart'; 
+import 'package:hrsummit/widgets/styles/mytextStyle.dart';
+import 'package:provider/provider.dart'; 
 
 class HomeBottomWidget extends StatelessWidget {
   final List<HomeIconData> items;
@@ -32,6 +38,19 @@ class HomeBottomWidget extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               log("Tapped on ${item.tYPE}");
+              if (item.tYPE == "X") {
+                 Helper.goToNext(DignitariesScreen.route);
+              } else if (item.tYPE == "D") {
+                Helper.goToNext(DelegateScreen.route);
+              } else {
+                // context.read<HomeModel>().calltabImgApi(item.sQNO.toString(), item.tYPE.toString());
+                Helper.goToNext(ItemDetailPage.route,argument: {
+                  "sqNo": item.sQNO.toString(),
+                  "type" : item.tYPE.toString(),
+                  "title" : item.nAME.toString()
+                });
+                log("Unknown type: ${item.tYPE} ${item.sQNO.toString()} ");
+              }
             },
             child: Column(
               children: [
@@ -104,22 +123,24 @@ class HomeBottomWidget extends StatelessWidget {
 
 class CommonAppbar extends StatelessWidget {
   final String title;
+  final bool isBackButton;
   final VoidCallback? onBack;
 
-  const CommonAppbar({super.key, required this.title, this.onBack});
+  const CommonAppbar({super.key, required this.title, this.onBack,this.isBackButton = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 5),
       margin: EdgeInsets.symmetric(vertical: 10),
       color: Mytheme.greyLight,
       child: Row(
         children: [
-          IconButton(
+         !isBackButton
+         ? IconButton(
             icon: ImageIcon(AssetImage(arrowback), color: Colors.black87),
             onPressed: onBack ?? () => Navigator.pop(context),
-          ),
+          ) :SizedBox.shrink(),
           Expanded(
             child: Text(
               title,
@@ -127,7 +148,7 @@ class CommonAppbar extends StatelessWidget {
               style: MyStyle.medium5().s16,
             ),
           ),
-          const SizedBox(width: 48), // keep symmetry with back button
+          const SizedBox(width: 48),  
         ],
       ),
     );

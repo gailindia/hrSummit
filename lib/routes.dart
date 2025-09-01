@@ -9,6 +9,7 @@ import 'package:hrsummit/state/quizQuestionsModel.dart';
 import 'package:hrsummit/ui/home/delegate_screen.dart';
 import 'package:hrsummit/ui/home/dignitaries_screen.dart';
 import 'package:hrsummit/ui/home/homeScreen.dart';
+import 'package:hrsummit/ui/home/image_screen.dart';
 import 'package:hrsummit/ui/login_screen.dart';
 import 'package:hrsummit/ui/quiz/archived_%20quiz_screen.dart';
 import 'package:hrsummit/ui/quiz/quiz_list.dart';
@@ -29,6 +30,11 @@ class RouteHelper {
             create: (_) => HomeModel(),
             child: const Homescreen(),
           ),
+      ItemDetailPage.route: (_) => ChangeNotifierProvider(
+            create: (_) => HomeModel(),
+            child:   ItemDetailPage(),
+          ),
+
   
        
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrsummit/utils/app_constants.dart';
 
 class BackgroundCardWidget extends StatelessWidget {
   final Widget child;
@@ -33,11 +34,12 @@ class BackgroundCardWidget extends StatelessWidget {
     );
   }
 }
+
 class ProfileContentWidget extends StatelessWidget {
   final String name;
   final String designation;
   final String imagePath;
-  final VoidCallback onViewMore;
+  final String onViewMore;
 
   const ProfileContentWidget({
     super.key,
@@ -50,77 +52,100 @@ class ProfileContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundCardWidget(
-      child:Row(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  mainAxisAlignment: MainAxisAlignment.spaceAround,
-  children: [
-    // Profile Image
-    ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Image.asset(
-        imagePath,
-        height: 50,
-        width: 50,
-        fit: BoxFit.cover,
-      ),
-    ),
-
-    const SizedBox(width: 12),
-
-    // Name + Designation
-    Expanded(
-      child: Column(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+         
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              baseImg + imagePath,
+              errorBuilder: (context, error, stackTrace) {
+                return Icon(
+                  Icons.account_circle,
+                  color: Colors.grey,
+                  size: 35,
+                );
+              },
             ),
           ),
-          const SizedBox(height: 4),
-          Text(
-            designation,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black54,
+
+          const SizedBox(width: 12),
+
+          // Name + Designation
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  designation,
+                  style: const TextStyle(fontSize: 14, color: Colors.black54),
+                ),
+              ],
+            ),
+          ),
+
+          // View More bottom aligned
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: GestureDetector(
+              onTap: () => viewMoreDialog(context, onViewMore),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+
+                children: const [
+                  Text(
+                    "View More",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Icon(Icons.arrow_right_alt, color: Colors.blue),
+                ],
+              ),
             ),
           ),
         ],
       ),
-    ),
-
-    // View More bottom aligned
-    Align(
-      alignment: Alignment.bottomCenter,
-      child: GestureDetector(
-        onTap: onViewMore,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-
-          children: const [
-            Text(
-              "View More",
-              style: TextStyle(
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(width: 4),
-            Icon(Icons.arrow_right_alt, color: Colors.blue),
-          ],
-        ),
-      ),
-    ),
-  ],
-)
-
-
-
     );
   }
 }
- 
+void viewMoreDialog(
+  BuildContext context,
+  String content 
+) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (_) {
+      return Center(
+        child: Material(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          child: Container( 
+            margin: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 10),
+            // child: Text("44",textAlign: TextAlign.center,)
+            child: Text(
+              content,
+              textAlign: TextAlign.center, 
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}

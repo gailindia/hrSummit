@@ -3,16 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hrsummit/ui/home/delegate_screen.dart';
 import 'package:hrsummit/ui/home/dignitaries_screen.dart';
+import 'package:hrsummit/ui/widgets/homeWidgets.dart';
 import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/state/loginModel.dart';
 import 'package:hrsummit/ui/home/homeScreen.dart';
 import 'package:hrsummit/utils/colors.dart';
 import 'package:hrsummit/utils/header_widget.dart';
 import 'package:hrsummit/utils/helper.dart';
+import 'package:hrsummit/utils/viewModel.dart';
 import 'package:hrsummit/widgets/commonBG.dart';
 import 'package:hrsummit/widgets/common_button.dart';
 import 'package:hrsummit/widgets/styles/mytextStyle.dart';
- 
+
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,29 +26,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
- 
-  String? otp = "";
- 
+  
 
-  // @override
-  // void initState() {
-  //   // fetchSecureStorageData();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    // fetchSecureStorageData();
+    withViewModel<LoginModel>(context, (viewModel){
+      viewModel.onVerifySuccess = () { 
+        Helper.goToRemoveUntil(Homescreen.route);
+      };
+    });
+    super.initState();
+  }
 
   // Future<void> fetchSecureStorageData() async {
-    // loginController.userIDController.text =
-    //     await LocalStorage.getUserName() ?? "";
-    // loginController.passwordController.text =
-    //     await LocalStorage.getPassWord() ?? "";
-    // if (loginController.userIDController.text.isNotEmpty &&
-    //     loginController.passwordController.text.isNotEmpty) {
-    //   loginController.loginUser();
-    // }
+  // loginController.userIDController.text =
+  //     await LocalStorage.getUserName() ?? "";
+  // loginController.passwordController.text =
+  //     await LocalStorage.getPassWord() ?? "";
+  // if (loginController.userIDController.text.isNotEmpty &&
+  //     loginController.passwordController.text.isNotEmpty) {
+  //   loginController.loginUser();
+  // }
   // }
 
- 
-  bool showOtpSection = false;  
+  bool showOtpSection = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,59 +58,100 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 25),
+          // padding: EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             children: [
-              // HeaderWidget(onMenuTap: () {}, onProfileTap: () {}),
-              // Image.asset(loginimg, height: 200, width: 200, fit: BoxFit.fill),
-              Text("Welcome", style: MyStyle.medium5().s22),
+              HeaderWidget(),
+              CommonAppbar(
+                isBackButton: true,
+                title: "Welcome"),
+              Image.asset(
+                loginimg,
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.fill,
+              ),
+              // Text("Welcome", style: MyStyle.medium5().s22),
               Text(
                 "Please Login Here",
                 style: MyStyle.medium5(Mytheme.brown).s25,
               ),
 
-              SizedBox(height: 15),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text("Mobile Number", style: MyStyle.medium5().s15),
-              ),
+              // SizedBox(height: 15),
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child: Text("Mobile Number", style: MyStyle.medium5().s15),
+              // ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15.0,
+                  horizontal: 25,
+                ),
                 child: TextFormField(
-                  minLines: 1,
-                  autocorrect: false,
-                  keyboardType: TextInputType.phone,
                   controller: context.read<LoginModel>().userIDController,
+                  keyboardType: TextInputType.phone,
                   maxLength: 10,
                   decoration: InputDecoration(
-                    fillColor: Colors.white,
                     filled: true,
+                    fillColor: Colors.white,
                     counterText: '',
-                    hintText: "Mobile",
-                    hintStyle: MyStyle.medium5().s25,
-                    contentPadding: EdgeInsets.symmetric(
+                    prefixIcon: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "+91",
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            height: 24,
+                            width: 1,
+                            color: Colors.grey,  
+                          ),
+                        ],
+                      ),
+                    ),
+                    prefixIconConstraints: const BoxConstraints(
+                      minWidth: 0,
+                      minHeight: 0,
+                    ),
+                    hintText: "Enter Mobile Number",
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Mytheme.greyLight,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 12,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 1,
-                        color: Color(0xff151515),
-                      ),
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide(
+                        color: Colors.grey.shade400,
                         width: 1,
-                        color: Color(0xff151515),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade400,
+                        width: 1,
                       ),
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: 10),
 
               /// Send OTP Button
               CommonButton(
+                margin: 25,
                 onPressed: () {
                   // if (context
                   //         .read<LoginModel>()
@@ -114,9 +159,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   //         .text
                   //         .trim()
                   //         .isNotEmpty) {
-                    // setState(() {
-                    //   showOtpSection = true;  
-                    // });
+                  //           context.read<LoginModel>().callLoginApi();
+                  //           context.read<LoginModel>().onLoginSuccess = () {
+                  //            setState(() {
+                  //   showOtpSection = true;
+                  // });
+                  //           }; 
                   // }
                   Helper.goToNext(Homescreen.route);
                   // Helper.goToNext(DelegateScreen.route);
@@ -125,46 +173,63 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: 'Send OTP',
               ),
 
+
               /// OTP Section
               Visibility(
                 visible: showOtpSection,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 15),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("OTP", style: MyStyle.medium5().s15),
+
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 25,vertical: 13),
+                      color: Colors.grey.shade200,
+                      height: 2,
+
                     ),
+                    // SizedBox(height: 15),
+                    // Align(
+                    //   alignment: Alignment.centerLeft,
+                    //   child: Text("OTP", style: MyStyle.medium5().s15),
+                    // ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 15.0,
+                        horizontal: 25,
+                      ),
                       child: TextFormField(
-                        minLines: 1,
-                        autocorrect: false,
-                        keyboardType: TextInputType.number,
                         controller: context.read<LoginModel>().otpController,
+                        keyboardType: TextInputType.phone,
                         maxLength: 6,
                         decoration: InputDecoration(
-                          fillColor: Colors.white,
                           filled: true,
+                          fillColor: Colors.white,
                           counterText: '',
+                          prefixIconConstraints: const BoxConstraints(
+                            minWidth: 0,
+                            minHeight: 0,
+                          ),
                           hintText: "Enter OTP",
-                          hintStyle: MyStyle.medium5().s25,
-                          contentPadding: EdgeInsets.symmetric(
+                          hintStyle: TextStyle(
+                            fontSize: 16,
+                            color: Mytheme.greyLight,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
                             vertical: 10,
                             horizontal: 12,
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              width: 1,
-                              color: Color(0xff151515),
-                            ),
-                            borderRadius: BorderRadius.circular(6.0),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
                             borderSide: BorderSide(
+                              color: Colors.grey.shade400,
                               width: 1,
-                              color: Color(0xff151515),
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade400,
+                              width: 1,
                             ),
                           ),
                         ),
@@ -172,25 +237,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 15),
                     CommonButton(
+                      margin: 25,
                       onPressed: () {
-                        // verify otp action
+                        if (context
+                          .read<LoginModel>()
+                          .otpController
+                          .text
+                          .trim()
+                          .isNotEmpty) {
+
+                         context.read<LoginModel>().callotpVarifyApi();
+                          }
+                        
                       },
                       title: "Verify OTP",
                     ),
-                    
                   ],
                 ),
               ),
-               SizedBox(height: 15),
-              // Align(
-              //   alignment: Alignment.bottomCenter,
-              //   child: Image.asset(
-              //     footer,
-              //     height: 30,
-              //     width: 200,
-              //     fit: BoxFit.fill,
-              //   ),
-              // )
+              SizedBox(height: 20),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  footer,
+                  height: 30,
+                  width: 220,
+                  fit: BoxFit.fill,
+                ),
+              )
             ],
           ),
         ),

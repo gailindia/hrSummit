@@ -7,6 +7,7 @@ import 'package:hrsummit/data/model/archived_quiz_model_repo.dart';
 import 'package:hrsummit/data/model/delegates_respModel.dart';
 import 'package:hrsummit/data/model/dignatries_respModel.dart';
 import 'package:hrsummit/data/model/homeIcon_respModel.dart';
+import 'package:hrsummit/data/model/iamge_respModel.dart';
 import 'package:hrsummit/data/model/marque_respModel.dart';
 import 'package:hrsummit/data/model/quiz_question_model_repo.dart'; 
 import 'package:hrsummit/utils/app_constants.dart';
@@ -82,6 +83,22 @@ class EndPointRepository {
     );
     log("getDignatriesService ${response.data}");
     return DignatriesRespDto.fromJson(response.data);
+  }
+  ///////////////// Dignatries ////////////////////////
+ Future<ImaageRespModel> getTabImageService({
+  required String sqNo,
+  required String type
+ }) async {
+  var data = {
+    "SQ_NO": sqNo,
+    "Type": type
+    };
+    final response = await client.post(
+      tabContentUrl,
+      data: data
+    );
+    log("getTabImageService ${response.data}");
+    return ImaageRespModel.fromJson(response.data);
   }
 
 

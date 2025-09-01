@@ -7,7 +7,7 @@ class DignitariesModel extends ViewModel {
   final ApiClient apiClient = ApiClient();
     
  
-    List<DignatriesData> _degnRespDto = [];
+ List<DignatriesData> _degnRespDto = [];
 
   List<DignatriesData> get dignRespDto => _degnRespDto;
 

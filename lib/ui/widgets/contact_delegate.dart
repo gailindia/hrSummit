@@ -3,73 +3,6 @@ import 'package:hrsummit/data/model/delegates_respModel.dart';
 import 'package:hrsummit/utils/colors.dart';
 import 'package:hrsummit/widgets/styles/mytextStyle.dart'; 
 
-// class ContactCard extends StatelessWidget {
-//   final List<Data> listDelegate;
-
-//   const ContactCard({super.key, required this.listDelegate});
-
-//   Widget buildRow(String label, String value) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 2),
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           SizedBox(
-//             width: 90, // fixed width for alignment
-//             child: Text(
-//               "$label :",
-//               style: const TextStyle(
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 13,
-//                 color: Colors.black87,
-//               ),
-//             ),
-//           ),
-//           Expanded(
-//             child: Text(
-//               value,
-//               style: const TextStyle(
-//                 fontSize: 13,
-//                 color: Colors.black87,
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: const EdgeInsets.all(8),
-//       padding: const EdgeInsets.all(12),
-//       decoration: BoxDecoration(
-//         color: const Color(0xFFF1ECF9),
-//         borderRadius: BorderRadius.circular(12),
-//         boxShadow: [
-//           BoxShadow(
-//             color: Colors.black12,
-//             blurRadius: 4,
-//             spreadRadius: 1,
-//             offset: const Offset(2, 2),
-//           ),
-//         ],
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           buildRow("Name","Lorem Ipsum"),
-//           buildRow("Company", "contact.company"),
-//           buildRow("Designation", "contact.designation"),
-//           buildRow("Email", "contact.email"),
-//           buildRow("Phone No", "contact.phone"),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 
 class ContactListPage extends StatelessWidget {
   final List<DelegateData> listDelegate;
@@ -78,15 +11,17 @@ class ContactListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: listDelegate.length,
+    return listDelegate.isNotEmpty
+        ?  Expanded(
+            child: ListView.builder(
+              itemCount: listDelegate.length,
         padding: const EdgeInsets.all(8),
         itemBuilder: (context, index) {
           return ContactCard(contact: listDelegate[index]);
         },
       ),
-    );
+    )
+    : Center(child: Text("No delegates found"));
   }
 }
 

@@ -1,6 +1,9 @@
  
 
+import 'dart:developer';
+
 import 'package:hrsummit/data/model/homeIcon_respModel.dart';
+import 'package:hrsummit/data/model/iamge_respModel.dart';
 import 'package:hrsummit/data/model/marque_respModel.dart';
 import 'package:hrsummit/data/repo/apiClient.dart';
 import 'package:hrsummit/data/repo/repository.dart';
@@ -8,13 +11,15 @@ import 'package:hrsummit/utils/viewModel.dart';
 
 class HomeModel extends ViewModel {
   final ApiClient apiClient = ApiClient();
- 
+    bool isMarqueeLoading = false;
+  bool isIconLoading = false;
+  String marquetext = "";
 
-
+  
 //   ////////////////////////////// home icon ///////////////////
 
   
-   List<HomeIconData> _homeIconRespDto = [];
+  List<HomeIconData> _homeIconRespDto = [];
 
   List<HomeIconData> get homeIconRespDto => _homeIconRespDto;
 
@@ -24,14 +29,24 @@ class HomeModel extends ViewModel {
   }
 
   Future<void> callIconApi() async {
-    if (isLoading) return; 
+    // if (isLoading) return; 
+     if (isIconLoading) return;
+    isIconLoading = true;
+    callNotify();
     callApi(() async {
       final repository = EndPointRepository(client: apiClient.init());
       final response = await repository.getHomeIconService();
       homeIconRespDto = response.data;  
       // log("upCTrainingResult length ${upCTrainingResult.length}");
-    });
+    }, showLoading: false).whenComplete(() {
+      isIconLoading = false;
+      callNotify();
+      });
+      
   }
+
+
+  ///////////////////. Marquee////////////////////////////////
   MarqueRespDto _marqueRespDto = MarqueRespDto();
 
   MarqueRespDto get marqueRespDto => _marqueRespDto;
@@ -41,17 +56,46 @@ class HomeModel extends ViewModel {
     notifyListeners();
   }
   
- 
 
   Future<void> callMarqueApi( ) async {
     // if (isLoading) return; 
+    if (isMarqueeLoading) return;
+    isMarqueeLoading = true;
+     callNotify();
     callApi(() async {
       final repository = EndPointRepository(client: apiClient.init());
       final response = await repository.getMarqueeService();
       marqueRespDto = response;  
+      marquetext  = response.marquee ?? "";
+      log("marqueRespDto   $marqueRespDto");
+    },showLoading: false).whenComplete(() {
+      isMarqueeLoading = false;
+      callNotify();
+    }); 
+  }  
+
+  ///////////////////////////////////. tab content images //////////////////////////
+  List<ImaageDataRespModel> _immgRespDto = [];
+
+  List<ImaageDataRespModel> get tabImgRespDto => _immgRespDto;
+
+  set tabImgRespDto(value) {
+    _immgRespDto = value;
+    notifyListeners();
+  }
+ 
+
+  Future<void> calltabImgApi(String sqNo,String type) async {
+    if (isLoading) return; 
+    callApi(() async {
+      final repository = EndPointRepository(client: apiClient.init());
+      final response = await repository.getTabImageService(
+        sqNo: sqNo,type: type
+      );
+      tabImgRespDto = response.data;
       // log("upCTrainingResult length ${upCTrainingResult.length}");
     });
-  } 
+  }
 
 
 //     //   getAppVersion() async {
