@@ -1,12 +1,14 @@
  
 
 import 'package:flutter/material.dart';
+import 'package:hrsummit/ui/quiz/quiz_list.dart';
 import 'package:hrsummit/ui/widgets/homeWidgets.dart';
 import 'package:hrsummit/ui/widgets/corouselWidget.dart';
 import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/state/homeModel.dart';
 import 'package:hrsummit/utils/colors.dart';
 import 'package:hrsummit/utils/header_widget.dart';
+import 'package:hrsummit/utils/helper.dart';
 import 'package:hrsummit/utils/loader.dart';
 import 'package:hrsummit/utils/viewModel.dart';
 import 'package:hrsummit/widgets/commonBG.dart';
@@ -141,7 +143,9 @@ class _HomescreenState extends State<Homescreen> {
                   SizedBox(height: 15),
                   HomeBottomWidget(items: provider.homeIconRespDto),
                   SizedBox(height: 25),
-                  CommonButton(margin: 50, onPressed: () {}, title: "Quiz"),
+                  CommonButton(margin: 50, onPressed: () {
+                    Helper.goToNext(QuizListScreen.route);
+                  }, title: "Quiz"),
  
                   
                 ],

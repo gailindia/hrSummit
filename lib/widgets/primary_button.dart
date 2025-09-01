@@ -7,105 +7,71 @@ import 'package:flutter/material.dart';
 import '../utils/app_constants.dart';
 import '../utils/colors.dart';
 
+class QuizCard extends StatelessWidget {
+  final String quizName;
+  final VoidCallback onStart;
 
-class PrimaryButton extends StatelessWidget {
-  final String text;
-  final double? width;
-  final Color? btnColor;
-  final OutlinedBorder shape;
-  final VoidCallback onPressed;
-  final double height, elevation;
-  final TextStyle? btnTextStyle;
-
-   PrimaryButton({
-    super.key,
-    this.width,
-    this.height = 48,
-    this.elevation = 4,
-    this.btnColor = Colors.deepPurpleAccent,
-    this.btnTextStyle =  const TextStyle(
-      fontSize: 18,
-      letterSpacing: 0.27,
-      color: Colors.white,
-      fontWeight: FontWeight.w700,
-    ),
-    this.shape = const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12))),
-    required this.text,
-    required this.onPressed,
-  });
+  const QuizCard({
+    Key? key,
+    required this.quizName,
+    required this.onStart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    return _DefaultButton(
-            text: text,
-            width: width,
-            shape: shape,
-            height: height,
-            btnColor: btnColor,
-            elevation: elevation,
-            onPressed: onPressed,
-            btnTextStyle: btnTextStyle, isEnabled: true, isUpperCase: false,
-          );
-  }
-}
-
-class _DefaultButton extends StatelessWidget {
-  final String? text;
-  final double? width;
-  final Color? btnColor;
-  final Function onPressed;
-  final OutlinedBorder shape;
-  final TextStyle? btnTextStyle;
-  final double height, elevation;
-  final bool isEnabled, isUpperCase;
-
-  const _DefaultButton({
-    this.width,
-    this.btnColor,
-    this.height = 48,
-    this.elevation = 4,
-    this.shape = const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(24))),
-    this.btnTextStyle = const TextStyle(
-      fontSize: 18,
-      letterSpacing: 0.27,
-      color: Colors.white,
-      fontWeight: FontWeight.w700,
-    ),
-    required this.text,
-    required this.onPressed,  required this.isEnabled, required this.isUpperCase,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: ElevatedButton(
-        clipBehavior: Clip.antiAlias,
-        onPressed: isEnabled ? onPressed as void Function()? : null,
-        style: ElevatedButton.styleFrom(
-          shape: shape, backgroundColor: btnColor,
-          elevation: elevation,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 25,
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEDE7F6), // light lavender background
+        borderRadius: BorderRadius.circular(30), // rounded edges
+      ),
+      child: Row(
+        children: [
+          /// Left: icon with circular background
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+                width: 25,
                 height: 25,
                 child: Image.asset(question)
             ),
-            SizedBox(width: 10,),
-            Text(isUpperCase ? text!.toUpperCase() : text!,
-                style: btnTextStyle),
-            Spacer(),
-            Text("Start",
-                style: btnTextStyle?.copyWith(color: Colors.black)),
-          ],
-        ),
+          ),
+          const SizedBox(width: 12),
+
+          /// Quiz name text
+          Expanded(
+            child: Text(
+              quizName,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
+
+          /// Right side "Start" pill button
+          Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFB39DDB), // purple button
+              borderRadius: BorderRadius.circular(30),
+            ),
+            // margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
+            child: GestureDetector(
+              onTap: onStart,
+              child: const Text(
+                "Start",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.black, // matches screenshot (black text)
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

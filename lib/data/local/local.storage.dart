@@ -10,10 +10,11 @@ class LocalStorage {
   static FlutterSecureStorage localStorage =   FlutterSecureStorage();
 
  static Future<void> saveUserDetails(
-  String username,String companyName,
+  String username,String companyName,mobileNo,
   String designation, 
   ) async {
     await localStorage.write(key: 'username', value: username); 
+    await localStorage.write(key: 'mobileNo', value: mobileNo);
     await localStorage.write(key: 'companyName', value: companyName);
     await localStorage.write(key: 'designation', value: designation); 
   }
@@ -28,7 +29,12 @@ class LocalStorage {
 
   }
  ///////////////////////// get data /////////////////////////////
- 
+
+  static Future<String?> getMobileNo() async {
+    return await localStorage.read(key: 'mobileNo');
+
+  }
+
   static Future<String?> getUserName() async {
     return await localStorage.read(key: 'username');
     

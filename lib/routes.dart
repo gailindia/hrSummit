@@ -35,9 +35,8 @@ class RouteHelper {
             child:   ItemDetailPage(),
           ),
 
-  
-       
-
+   
+ 
       QuizScreen.route: (_) => ChangeNotifierProvider(
         create: (_) => QuizQuestionsModel(),
         child: QuizScreen(),

@@ -12,6 +12,7 @@ import '../../utils/app_constants.dart';
 import '../../utils/header_widget.dart';
 import '../../utils/helper.dart';
 import '../../widgets/commonBG.dart';
+import '../widgets/homeWidgets.dart';
 
 class QuizListScreen extends StatefulWidget {
   static const String route = '/quizList';
@@ -42,101 +43,110 @@ class _QuizListScreenState extends State<QuizListScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 HeaderWidget(),
-                Image.asset(quiz),
-                SizedBox(height: 10),
-                provider.upCTrainingResult.data != null ? Expanded(
+                CommonAppbar(
+                  title: "QUIZ",
+                  
+                ),
+                SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Image.asset(quiz),
+                      SizedBox(height: 10),
+                      /// Active Quiz Section
+                      provider.upCTrainingResult.data != null
+                          ? Column(
                         children: [
-                          SizedBox(
-                            width: 25,
-                            height: 25,
-                            child: Image.asset(activeQuiz),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 25,
+                                height: 25,
+                                child: Image.asset(activeQuiz),
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                "Active Quiz",
+                                style: TextStyle(
+                                  color: Colors.brown[900],
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 10),
-                          Text(
-                            "Active Quiz",
-                            style: TextStyle(
-                              color: Colors.brown[900],
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: provider.upCTrainingResult.data != null
-                              ? provider.upCTrainingResult.data!.length
-                              : 0,
-                          itemBuilder: (BuildContext context, int index) => Container(
-                            child: Padding(
+                          ListView.builder(
+                            shrinkWrap: true, // ✅ important
+                            physics: const NeverScrollableScrollPhysics(), // ✅ let parent scroll
+                            itemCount: provider.upCTrainingResult.data?.length ?? 0,
+                            itemBuilder: (BuildContext context, int index) => Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: PrimaryButton(
-                                btnColor: Colors.deepPurpleAccent[100],
-                                text: provider.upCTrainingResult.data![index].qUIZNAME!,
-                                onPressed: () {
-                                  print("onclick on question :: ${ provider.upCTrainingResult.data![index].qUIZID!}");
-                                  // Helper.goToNext(QuizScreen.route);
-                                  Helper.goToNext(QuizScreen.route,argument: "${ provider.upCTrainingResult.data![index].qUIZID!}",);
-
+                              child: QuizCard(
+                                quizName: provider.upCTrainingResult.data![index].qUIZNAME!,
+                                onStart: () {
+                                  print("Quiz Started!");
+                                  Helper.goToNext(
+                                    QuizScreen.route,
+                                    argument:
+                                    "${provider.upCTrainingResult.data![index].qUIZID!}",
+                                  );
                                 },
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ):Container(),
-                provider.ArcheiveQuesResult.data != null  ?  Expanded(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 25,
-                            height: 25,
-                            child: Image.asset(archivedQuiz),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "Archived Quiz",
-                            style: TextStyle(
-                              color: Colors.brown[900],
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
                         ],
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: provider.ArcheiveQuesResult.data != null
-                              ? provider.ArcheiveQuesResult.data!.length
-                              : 0,
-                          itemBuilder: (BuildContext context, int index) => Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: PrimaryButton(
-                                btnColor: Colors.deepPurpleAccent[100],
-                                text: provider.ArcheiveQuesResult.data![index].qUIZNAME!,
-                                onPressed: () {
+                      )
+                          : Container(),
 
-                                  // Navigator.pushNamed(context, ArchiveQuesScreen.route, arguments: "2");
-                                  Helper.goToNext(ArchiveQuesScreen.route,argument: "${ provider.ArcheiveQuesResult.data![index].qUIZID!}",);
+                      /// Archived Quiz Section
+                      provider.ArcheiveQuesResult.data != null
+                          ? Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 25,
+                                height: 25,
+                                child: Image.asset(archivedQuiz),
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                "Archived Quiz",
+                                style: TextStyle(
+                                  color: Colors.brown[900],
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true, // ✅ important
+                            physics: const NeverScrollableScrollPhysics(), // ✅ let parent scroll
+                            itemCount: provider.ArcheiveQuesResult.data?.length ?? 0,
+                            itemBuilder: (BuildContext context, int index) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: QuizCard(
+                                quizName: provider.ArcheiveQuesResult.data![index].qUIZNAME!,
+                                onStart: () {
+                                  print("Quiz Started!");
+                                  Helper.goToNext(
+                                    QuizScreen.route,
+                                    argument:
+                                    "${provider.ArcheiveQuesResult.data![index].qUIZID!}",
+                                  );
                                 },
                               ),
                             ),
                           ),
-                        ),
-                      ),
+                        ],
+                      )
+                          : Container(),
                     ],
                   ),
-                ) : Container()
+                )
               ],
             ),
           );

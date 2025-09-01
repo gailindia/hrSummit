@@ -2,12 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hrsummit/data/model/archived_quiz_model_repo.dart';
 import 'package:hrsummit/state/archiveQuizModel.dart';
+import 'package:hrsummit/ui/quiz/quiz_list.dart';
+import 'package:hrsummit/ui/quiz/quiz_screen.dart';
+import 'package:hrsummit/utils/helper.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/app_constants.dart';
 import '../../utils/header_widget.dart';
 import '../../utils/viewModel.dart';
 import '../../widgets/commonBG.dart';
+import '../widgets/homeWidgets.dart';
 import '../widgets/quizOptionsWidget.dart';
 
 class ArchiveQuesScreen extends StatefulWidget {
@@ -52,6 +56,12 @@ class _ArchiveQuesScreenState extends State<ArchiveQuesScreen> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     HeaderWidget(),
+                    CommonAppbar(
+                      title: "QUIZ",
+                      onBack: () {
+                        Helper.goToNext(QuizListScreen.route);
+                      },
+                    ),
                     Image.asset(quizQuestion),
                     SizedBox(height: 10),
                     Text(

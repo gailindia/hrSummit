@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hrsummit/state/quizQuestionsModel.dart';
+import 'package:hrsummit/ui/quiz/quiz_list.dart';
 import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/utils/header_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/helper.dart';
 import '../../utils/viewModel.dart';
 import '../../widgets/commonBG.dart';
 import '../../widgets/primary_button.dart';
+import '../widgets/homeWidgets.dart';
 import '../widgets/quizOptionsWidget.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -57,6 +60,12 @@ class _quizScreenState extends State<QuizScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 HeaderWidget(),
+                CommonAppbar(
+                  title: "QUIZ",
+                  onBack: () {
+                    Helper.goToNext(QuizListScreen.route);
+                  },
+                ),
                 Image.asset(quizQuestion),
                 SizedBox(height: 10),
                 Text(
@@ -98,15 +107,61 @@ class _quizScreenState extends State<QuizScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "${index + 1}. ${item.qUESNAME ?? ''}",
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                              Container(
+                                margin: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFE6E6FA), // light purple
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
+                                child: Row(
+                                  children: [
+                                    // Number on left
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFFB39DDB), // darker purple
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(12),
+                                          bottomLeft: Radius.circular(12),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        '${index + 1}.',
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+
+                                    // Text content
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                        child: Text(
+                                          item.qUESNAME ?? '',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
+
+                              // Text(
+                              //   "${index + 1}. ${item.qUESNAME ?? ''}",
+                              //   style: const TextStyle(
+                              //     fontSize: 16,
+                              //     fontWeight: FontWeight.bold,
+                              //   ),
+                              //   maxLines: 3,
+                              //   overflow: TextOverflow.ellipsis,
+                              // ),
                               const SizedBox(height: 8),
                               QuizOptionsWidget(
                                 text: item.oPTION1,
@@ -179,7 +234,6 @@ class _quizScreenState extends State<QuizScreen> {
                     ) async {
                       viewModel.submitQuizApi(
                         widget.quizId!,
-                        "7987593870",
                         answers,
                       );
                     });

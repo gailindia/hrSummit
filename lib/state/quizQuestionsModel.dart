@@ -2,6 +2,7 @@ import 'package:hrsummit/data/model/quiz_question_model_repo.dart';
 import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/utils/viewModel.dart';
 
+import '../data/local/local.storage.dart';
 import '../data/repo/apiClient.dart';
 import '../data/repo/repository.dart';
 import '../ui/quiz/quiz_list.dart';
@@ -43,12 +44,13 @@ class QuizQuestionsModel extends ViewModel{
     });
   }
 
-  Future<void> submitQuizApi(String quizId,String responseBy, List<Map<String, String>>  answerList) async {
+  Future<void> submitQuizApi(String quizId,List<Map<String, String>>  answerList) async {
     hideKeyBoard();
     if (isLoading) return;
     callApi(() async {
       EndPointRepository repository = EndPointRepository(client: apiClient.init());
-      final res = await repository.submitQuizService(quizId,responseBy,answerList);
+      var responseBy = await LocalStorage.getMobileNo();
+      final res = await repository.submitQuizService(quizId,responseBy!,answerList);
       if (res.statusCode == 200) {
         // upCTrainingResult = res;
         print(res);

@@ -1,3 +1,4 @@
+import 'package:hrsummit/data/local/local.storage.dart';
 import 'package:hrsummit/data/model/archived_quiz_model_repo.dart';
 import 'package:hrsummit/utils/viewModel.dart';
 
@@ -23,7 +24,8 @@ class ArchiveQuizModel extends ViewModel{
     if (isLoading) return;
     callApi(() async {
       EndPointRepository repository = EndPointRepository(client: apiClient.init());
-      final res = await repository.archiveQuizService(quizId,"7987593870");
+      var mobile = await LocalStorage.getMobileNo();
+      final res = await repository.archiveQuizService(quizId,mobile!);
       if (res.statusCode == 200) {
         upCTrainingResult = res;
         print(res);

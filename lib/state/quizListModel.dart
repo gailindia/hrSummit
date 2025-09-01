@@ -31,7 +31,8 @@ class QuizListModel extends ViewModel{
     if (isLoading) return;
     callApi(() async {
       EndPointRepository repository = EndPointRepository(client: apiClient.init());
-      final res = await repository.quizListService("7987593870");
+      var mobile = await LocalStorage.getMobileNo();
+      final res = await repository.quizListService(mobile.toString());
       if (res.statusCode == 200) {
         // upCTrainingResult = res;
         List<Data> archive = res.data!.where((data) => data.tYPE == "P" ).toList();
