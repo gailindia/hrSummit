@@ -26,12 +26,18 @@ class QuizOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("selectValue $selectValue");
-    if(selectValue == "P"){
+    if (selectValue == "P") {
       print("selectValue $selectedOption");
-      return  SizedBox(
-        width: MediaQuery.sizeOf(context).width,
+      return Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.purple.shade200,
+            width: 1.5,
+          ),
+          borderRadius: BorderRadius.circular(28),
+        ),
         child: RadioListTile<int>(
-          title: Text(text!),
+          title: Text(text!,style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
           value: selectedOption!,
           groupValue: selectedOption,
           toggleable: toggleable!,
@@ -40,11 +46,18 @@ class QuizOptionsWidget extends StatelessWidget {
           onChanged: onPressed,
         ),
       );
-    }else if(selectValue == "O"){
-      return SizedBox(
-        width: MediaQuery.sizeOf(context).width,
+    } else if (selectValue == "O") {
+      return Container(
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.purple.shade200,
+            width: 1.5,
+          ),
+          borderRadius: BorderRadius.circular(28),
+        ),
         child: RadioListTile<int>(
-          title: Text(text!),
+          title: Text(text!,style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
           value: correctOption!,
           groupValue: correctOption,
           toggleable: toggleable!,
@@ -53,11 +66,18 @@ class QuizOptionsWidget extends StatelessWidget {
           onChanged: onPressed,
         ),
       );
-    }else if(selectValue == "OP"){
-      return SizedBox(
-        width: MediaQuery.sizeOf(context).width,
+    } else if (selectValue == "OP") {
+      return Container(
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.purple.shade200,
+            width: 1.5,
+          ),
+          borderRadius: BorderRadius.circular(28),
+        ),
         child: RadioListTile<int>(
-          title: Text(text!),
+          title: Text(text!,style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
           value: correctOption!,
           groupValue: correctOption,
           toggleable: toggleable!,
@@ -67,17 +87,24 @@ class QuizOptionsWidget extends StatelessWidget {
         ),
       );
     }
-    return SizedBox(
-            width: MediaQuery.sizeOf(context).width,
-            child: RadioListTile<int>(
-              title: Text(text!),
-              value: selectedOption!,
-              groupValue: groupVal,
-              toggleable: toggleable!,
-              activeColor: activeColor,
-              // selected: _radioSelected == getIndex,
-              onChanged: onPressed,
-            ),
-          );
+    return Container(
+      margin: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.purple.shade200,
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(28),
+      ),
+      child: RadioListTile<int>(
+        title: Text(text!,style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+        value: selectedOption!,
+        groupValue: groupVal,
+        toggleable: toggleable!,
+        activeColor: activeColor,
+        // selected: _radioSelected == getIndex,
+        onChanged: onPressed,
+      ),
+    );
   }
 }

@@ -29,9 +29,6 @@ class RouteHelper {
             create: (_) => HomeModel(),
             child: const Homescreen(),
           ),
-  
-       
-
       QuizScreen.route: (_) => ChangeNotifierProvider(
         create: (_) => QuizQuestionsModel(),
         child: QuizScreen(),

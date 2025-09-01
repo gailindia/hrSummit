@@ -96,7 +96,7 @@ class LoginModel extends ViewModel{
   Future<void> callotpVarifyApi() async { 
     hideKeyBoard();
     if (isLoading) return;
-    
+
     callApi(() async { 
       EndPointRepository repository = EndPointRepository(client: apiClient.init());
       final res = await repository.otpService(
@@ -107,6 +107,7 @@ class LoginModel extends ViewModel{
         await LocalStorage.saveUserDetails(
           res.name ?? "",
            res.company ?? "",
+           userIDController.text.trim(),
           res.designation ?? ""
         );
         // Helper.goToRemoveUntil(Homescreen.route);
