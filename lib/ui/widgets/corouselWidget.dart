@@ -26,7 +26,7 @@ class _DynamicCarouselState extends State<DynamicCarousel> {
         CarouselSlider(
           options: CarouselOptions(
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
+            autoPlayInterval: Duration(seconds: 2),
             enlargeCenterPage: true,
             viewportFraction: 0.9,
             aspectRatio: 16 / 9,

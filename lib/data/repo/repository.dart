@@ -1,5 +1,11 @@
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:hrsummit/data/model/delegates_respModel.dart';
+import 'package:hrsummit/data/model/dignatries_respModel.dart';
+import 'package:hrsummit/data/model/homeIcon_respModel.dart';
+import 'package:hrsummit/data/model/marque_respModel.dart';
 import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/data/model/verifyotp_respModel.dart';
 import 'package:hrsummit/data/model/login_respModel.dart';
@@ -37,6 +43,39 @@ class EndPointRepository {
       data: data,
     );
     return VerifyOtpRespDto.fromJson(response.data);
+  }
+
+//////// homeIcon Service ////////////////////
+ Future<HomeIconRespDto> getHomeIconService() async {
+    final response = await client.get(
+      submitTagsUrl,
+    );
+    log("getHomeIconService ${response.data}");
+    return HomeIconRespDto.fromJson(response.data);
+  }
+  ///////////////// Marquee ////////////////////////
+ Future<MarqueRespDto> getMarqueeService() async {
+    final response = await client.get(
+      marqueUrl,
+    );
+    log("getMarqueeService ${response.data}");
+    return MarqueRespDto.fromJson(response.data);
+  }
+  ///////////////// Delegtes ////////////////////////
+ Future<DelegateRespDto> getDelegateService() async {
+    final response = await client.get(
+      delegateUrl,
+    );
+    log("getDelegateService ${response.data}");
+    return DelegateRespDto.fromJson(response.data);
+  }
+  ///////////////// Dignatries ////////////////////////
+ Future<DignatriesRespDto> getDignatriesService() async {
+    final response = await client.get(
+      dignitariesUrl,
+    );
+    log("getDignatriesService ${response.data}");
+    return DignatriesRespDto.fromJson(response.data);
   }
 
 

@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:hrsummit/ui/home/delegate_screen.dart';
+import 'package:hrsummit/ui/home/dignitaries_screen.dart';
 import 'package:hrsummit/utils/app_constants.dart';
 import 'package:hrsummit/state/loginModel.dart';
 import 'package:hrsummit/ui/home/homeScreen.dart';
@@ -80,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fillColor: Colors.white,
                     filled: true,
                     counterText: '',
-                    hintText: "Enter Mobile Number",
+                    hintText: "Mobile",
                     hintStyle: MyStyle.medium5().s25,
                     contentPadding: EdgeInsets.symmetric(
                       vertical: 10,
@@ -112,11 +114,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   //         .text
                   //         .trim()
                   //         .isNotEmpty) {
-                  //   setState(() {
-                  //     showOtpSection = true;  
-                  //   });
+                    // setState(() {
+                    //   showOtpSection = true;  
+                    // });
                   // }
                   Helper.goToNext(Homescreen.route);
+                  // Helper.goToNext(DelegateScreen.route);
+                  // Helper.goToNext(DignitariesScreen.route);
                 },
                 title: 'Send OTP',
               ),

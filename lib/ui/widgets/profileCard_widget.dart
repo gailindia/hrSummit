@@ -49,64 +49,77 @@ class ProfileContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // Profile Image
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.asset(
-            imagePath,
-            height: 50,
-            width: 50,
-            fit: BoxFit.cover,
-          ),
-        ),
+    return BackgroundCardWidget(
+      child:Row(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children: [
+    // Profile Image
+    ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.asset(
+        imagePath,
+        height: 50,
+        width: 50,
+        fit: BoxFit.cover,
+      ),
+    ),
 
-        const SizedBox(width: 12),
+    const SizedBox(width: 12),
 
-        // Name + Designation
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                designation,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black54,
-                ),
-              ),
-            ],
+    // Name + Designation
+    Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
-        ),
+          const SizedBox(height: 4),
+          Text(
+            designation,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black54,
+            ),
+          ),
+        ],
+      ),
+    ),
 
-        // View More button
-        GestureDetector(
-          onTap: onViewMore,
-          child: Row(
-            children: const [
-              Text(
-                "View More",
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ),
+    // View More bottom aligned
+    Align(
+      alignment: Alignment.bottomCenter,
+      child: GestureDetector(
+        onTap: onViewMore,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+
+          children: const [
+            Text(
+              "View More",
+              style: TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(width: 4),
-              Icon(Icons.arrow_right_alt, color: Colors.blue),
-            ],
-          ),
+            ),
+            SizedBox(width: 4),
+            Icon(Icons.arrow_right_alt, color: Colors.blue),
+          ],
         ),
-      ],
+      ),
+    ),
+  ],
+)
+
+
+
     );
   }
 }

@@ -1,12 +1,16 @@
   import 'package:flutter/material.dart';
+import 'package:hrsummit/utils/colors.dart';
+import 'package:hrsummit/widgets/styles/mytextStyle.dart';
 
 class CommonButton extends StatefulWidget {
   final Function() onPressed;
   final String title;
+  final double margin;
   const CommonButton({
     super.key,
     required this.onPressed,
     required this.title,
+    this.margin = 10,
   });
 
   @override
@@ -17,15 +21,16 @@ class _CommonButtonState extends State<CommonButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-     borderRadius: BorderRadius.circular(25),
+    //  borderRadius: BorderRadius.circular(50),
       onTap: widget.onPressed,
       child: Container(
-        height: 40,
+        height: 42,
+        margin: EdgeInsets.symmetric(horizontal: widget.margin), 
         alignment: Alignment.center,
         width: double.infinity, 
                   decoration: BoxDecoration(
-                    color: Color(0xff002138),
-                    borderRadius: BorderRadius.circular(4),
+                    color: Mytheme.brown,
+                    borderRadius: BorderRadius.circular(50),
                   ),
         // decoration: BoxDecoration(
         //   gradient: const LinearGradient(
@@ -40,11 +45,7 @@ class _CommonButtonState extends State<CommonButton> {
         // ),
         child: Text(
           widget.title,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style:  MyStyle.medium5(Mytheme.white).s16
           // style: buttonTitleStyle,
         ),
       ),

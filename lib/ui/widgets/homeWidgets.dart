@@ -1,8 +1,138 @@
 // import 'dart:developer';
 
-// import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart'; 
-// import 'package:provider/provider.dart';
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:hrsummit/data/model/homeIcon_respModel.dart';
+import 'package:hrsummit/utils/app_constants.dart';
+import 'package:hrsummit/utils/colors.dart'; 
+import 'package:hrsummit/widgets/styles/mytextStyle.dart'; 
+
+class HomeBottomWidget extends StatelessWidget {
+  final List<HomeIconData> items;
+  const HomeBottomWidget({super.key, required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Mytheme.greyLight,
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+      child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(), // prevent inner scroll
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          crossAxisSpacing: 23,
+          mainAxisSpacing: 2,
+          childAspectRatio: 0.65,
+        ),
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return GestureDetector(
+            onTap: () {
+              log("Tapped on ${item.tYPE}");
+            },
+            child: Column(
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4,
+                        spreadRadius: 1,
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
+                  child: Image.network(
+                    baseImg + item.iCONNAME.toString(),
+                    height: 35,
+                    width: 35,
+                    color: Colors.deepPurple,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(
+                        Icons.image_not_supported_outlined,
+                        color: Colors.grey,
+                        size: 35,
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  item.nAME ?? "NA",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+                  maxLines: 2,
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// class MenuItem {
+//   final String title;
+//   final IconData icon;
+//   final VoidCallback onTap;
+
+//   MenuItem({required this.title, required this.icon, required this.onTap});
+// }
+// final menuItems = [
+//   MenuItem(title: "e-Invites", icon: Icons.mail, onTap: () {}),
+//   MenuItem(title: "Dignitaries", icon: Icons.person, onTap: () {}),
+//   MenuItem(title: "Delegates", icon: Icons.public, onTap: () {}),
+//   MenuItem(title: "Venue", icon: Icons.location_on, onTap: () {}),
+//   MenuItem(title: "Gallery", icon: Icons.photo, onTap: () {}),
+//   MenuItem(title: "Event Highlights", icon: Icons.event, onTap: () {}),
+//   MenuItem(title: "Know The Community", icon: Icons.groups, onTap: () {}),
+//   MenuItem(title: "Know Your Host", icon: Icons.badge, onTap: () {}),
+// ];
+
+class CommonAppbar extends StatelessWidget {
+  final String title;
+  final VoidCallback? onBack;
+
+  const CommonAppbar({super.key, required this.title, this.onBack});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      margin: EdgeInsets.symmetric(vertical: 10),
+      color: Mytheme.greyLight,
+      child: Row(
+        children: [
+          IconButton(
+            icon: ImageIcon(AssetImage(arrowback), color: Colors.black87),
+            onPressed: onBack ?? () => Navigator.pop(context),
+          ),
+          Expanded(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: MyStyle.medium5().s16,
+            ),
+          ),
+          const SizedBox(width: 48), // keep symmetry with back button
+        ],
+      ),
+    );
+  }
+}
 
 // // void showAttendanceDialog(BuildContext context,HomeModel homeModel) {
 // //   final homeModel = context.read<HomeModel>();

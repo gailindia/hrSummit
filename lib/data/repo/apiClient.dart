@@ -31,10 +31,10 @@ class ApiInterceptors extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    var token = await LocalStorage.getToken();
+    // var token = await LocalStorage.getToken();
     //"token $token");
-    // var token = "87|mQMfYnj4hadLVO3OaNqhc1JnqvJqoW5nXd0Ps0A1bb6edf42";
-    // var localLangCode = LocalStorage.prefs.getString('languageId') ?? 'en';
+    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ijc5ODc1OTM4NzAiLCJuYmYiOjE3NTY0NjMwODQsImV4cCI6MTc4Nzk5OTA4NCwiaWF0IjoxNzU2NDYzMDg0fQ.hymgxbIV5_0_FpM8SXxH9eIR7TTDRZWTRV-n_Swct3o";
+     
     if (token != null) {
       options.headers["Authorization"] = "Bearer $token";
     }

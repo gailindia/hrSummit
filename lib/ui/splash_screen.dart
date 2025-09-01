@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:hrsummit/utils/app_constants.dart';
+import 'package:flutter/material.dart'; 
 import 'package:hrsummit/ui/login_screen.dart';
 import 'package:hrsummit/utils/colors.dart';
 import 'package:hrsummit/utils/helper.dart';
