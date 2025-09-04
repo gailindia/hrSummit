@@ -62,7 +62,7 @@ class _ArchiveQuesScreenState extends State<ArchiveQuesScreen> {
                         Helper.goToNext(QuizListScreen.route);
                       },
                     ),
-                    Image.asset(quizQuestion),
+                    // Image.asset(quizQuestion),
                     SizedBox(height: 10),
                     Text(
                       "Questions & Answers",

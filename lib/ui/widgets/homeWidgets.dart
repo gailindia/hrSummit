@@ -131,7 +131,7 @@ class CommonAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 3),
       margin: EdgeInsets.symmetric(vertical: 10),
       color: Mytheme.greyLight,
       child: Row(
@@ -140,7 +140,7 @@ class CommonAppbar extends StatelessWidget {
          ? IconButton(
             icon: ImageIcon(AssetImage(arrowback), color: Colors.black87),
             onPressed: onBack ?? () => Navigator.pop(context),
-          ) :SizedBox.shrink(),
+          ) :const SizedBox(width: 40),
           Expanded(
             child: Text(
               title,

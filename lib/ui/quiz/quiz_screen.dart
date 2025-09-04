@@ -66,7 +66,7 @@ class _quizScreenState extends State<QuizScreen> {
                     Helper.goToRemoveUntil(QuizListScreen.route);
                   },
                 ),
-                Image.asset(quizQuestion),
+                // Image.asset(quizQuestion),
                 SizedBox(height: 10),
                 Text(
                   "Questions",

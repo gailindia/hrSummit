@@ -20,29 +20,31 @@ class HeaderWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.network(
-            "${baseImg}Home/gail-logo.png",
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(
+          // Image.network(
+          //   "${baseImg}Home/gail-logo.png",
+          //   fit: BoxFit.cover,
+          //   errorBuilder: (context, error, stackTrace) {
+          //     return 
+              Image.asset(
                 kIconLogo,
                 height: 50,
                 width: 70,
                 fit: BoxFit.contain,
-              );
-            },
+            //   );
+            // },
           ),
-          Image.network(
-            "${baseImg}Home/hr-summit.png",
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(
+          // Image.network(
+          //   "${baseImg}Home/hr-summit.png",
+          //   fit: BoxFit.cover,
+          //   errorBuilder: (context, error, stackTrace) {
+          //     return 
+              Image.asset(
                 khrimgLogo,
                 height: 60,
                 width: 50,
                 fit: BoxFit.contain,
-              );
-            },
+            //   );
+            // },
           ),
         ],
       ),

@@ -72,7 +72,9 @@ class DelegateScreen extends StatefulWidget {
       return MyAppBackGroundVM<DelegatesModel>(
         child: Consumer<DelegatesModel>(
           builder: (context, provider, child) {
-         
+          if (filteredList.isEmpty && provider.delegRespDto.isNotEmpty) {
+      filteredList = provider.delegRespDto;
+    }
             return Scaffold(
               backgroundColor: Colors.transparent,
               body: Column(
@@ -99,7 +101,7 @@ class DelegateScreen extends StatefulWidget {
                               icon: Icon(Icons.clear),
                               onPressed: () {
                                 _searchController.clear();
-                                // _onSearchChanged(); // reset list
+                                _onSearchChanged("");
                               },
                             )
                           : null,
@@ -109,7 +111,7 @@ class DelegateScreen extends StatefulWidget {
                     ),
                   ),
                 ),
-                ContactListPage(listDelegate: provider.delegRespDto),
+                ContactListPage(listDelegate: filteredList),
               ],
             ),
 

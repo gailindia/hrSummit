@@ -41,54 +41,59 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       child: Consumer<HomeModel>(
         builder: (context, provider, child) {
           return Scaffold(
-            body: Column(
-              children: [
-                HeaderWidget(),
-                SizedBox(height: 5),
-                CommonAppbar(title: title),
-                Center(
-                  child: provider.tabImgRespDto.length == 1
-                      ? Image.network(
-                          baseImg +
-                              provider.tabImgRespDto.first.iMGURL.toString(),
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Center(
-                              child: Text("Image failed to load"),
-                            );
-                          },
-                        )
-                      : CarouselSlider(
-                          options: CarouselOptions(
-                            autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 2),
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.9,
-                            aspectRatio: 16 / 9,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _currentIndex = index;
-                              });
+            body: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                children: [
+                  HeaderWidget(),
+                  SizedBox(height: 5),
+                  CommonAppbar(title: title),
+                  Center(
+                    child: provider.tabImgRespDto.length == 1
+                        ? Image.network(
+                            baseImg +
+                                provider.tabImgRespDto.first.iMGURL.toString(),
+                            fit: BoxFit.fill,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Center(
+                                child: Text("Image failed to load"),
+                              );
                             },
+                          )
+                        : CarouselSlider(
+                            options: CarouselOptions(
+                              height: MediaQuery.of(context).size.height * 0.7,
+                                
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 2),
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.9,
+                              aspectRatio: 16 / 9,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _currentIndex = index;
+                                });
+                              },
+                            ),
+                            items: provider.tabImgRespDto.map((url) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  baseImg + url.iMGURL.toString(),
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Center(
+                                      child: Text("Image failed to load"),
+                                    );
+                                  },
+                                ),
+                              );
+                            }).toList(),
                           ),
-                          items: provider.tabImgRespDto.map((url) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                baseImg + url.iMGURL.toString(),
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Center(
-                                    child: Text("Image failed to load"),
-                                  );
-                                },
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           );
         },

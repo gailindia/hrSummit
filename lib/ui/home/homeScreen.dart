@@ -68,35 +68,37 @@ class _HomescreenState extends State<Homescreen> {
                     margin: EdgeInsets.symmetric(vertical: 10),
                     color: Mytheme.greyLight,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         provider.marquetext != ""
                   ? Text(provider.marquetext, style: MyStyle.medium5().s18)
-                  : Expanded(
-                          child: RichText(
-                            maxLines: 1,
-                            text: TextSpan(
-                              style: MyStyle.medium5().s18,
+                  
+                  : Text("NA")
+                  // : Expanded(
+                  //         child: RichText(
+                  //           maxLines: 1,
+                  //           text: TextSpan(
+                  //             style: MyStyle.medium5().s18,
 
-                              children: [
-                                // TextSpan(text: "64"),
-                                // WidgetSpan(
-                                //   child: Transform.translate(
-                                //     offset: const Offset(2, -6),
-                                //     child: Text("th"),
-                                //   ),
-                                // ),
-                                TextSpan(text: "HR Summit of Oil & Gas PSUs"),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Image.asset(
-                          notifIcon,
-                          height: 18,
-                          width: 18,
-                          fit: BoxFit.fill,
-                        ),
+                  //             children: [
+                  //               // TextSpan(text: "64"),
+                  //               // WidgetSpan(
+                  //               //   child: Transform.translate(
+                  //               //     offset: const Offset(2, -6),
+                  //               //     child: Text("th"),
+                  //               //   ),
+                  //               // ),
+                  //               TextSpan(text: "HR Summit of Oil & Gas PSUs"),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                        // Image.asset(
+                        //   notifIcon,
+                        //   height: 18,
+                        //   width: 18,
+                        //   fit: BoxFit.fill,
+                        // ),
                       ],
                     ),
                   ),

@@ -26,13 +26,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  
-
   @override
   void initState() {
     // fetchSecureStorageData();
-    withViewModel<LoginModel>(context, (viewModel){
-      viewModel.onVerifySuccess = () { 
+    withViewModel<LoginModel>(context, (viewModel) {
+      viewModel.onVerifySuccess = () {
         Helper.goToRemoveUntil(Homescreen.route);
       };
     });
@@ -62,22 +60,53 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               HeaderWidget(),
-              CommonAppbar(
-                isBackButton: true,
-                title: "Welcome"),
+              // CommonAppbar(
+              //   isBackButton: true,
+              //   title: "65th HR Summit of Oil & Gas PSUs"),
+              Container(
+                width: double.infinity,
+                // padding: EdgeInsets.symmetric( vertical: 12),
+                // margin: EdgeInsets.symmetric(vertical: 10),
+                // color: Mytheme.greyLight,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                margin: EdgeInsets.symmetric(vertical: 10),
+                color: Mytheme.greyLight,
+                alignment: Alignment.center,
+                child: RichText(
+                  maxLines: 1,
+                  text: TextSpan(
+                    style: MyStyle.medium5().s18,
+
+                    children: [
+                      TextSpan(text: "65"),
+                      WidgetSpan(
+                        child: Transform.translate(
+                          offset: const Offset(2, -6),
+                          child: Text("th", style: MyStyle.medium5().s14),
+                        ),
+                      ),
+                      TextSpan(text: " HR Summit of Oil & Gas PSUs"),
+                    ],
+                  ),
+                ),
+              ),
+
               Image.asset(
                 loginimg,
                 height: 250,
                 width: double.infinity,
                 fit: BoxFit.fill,
               ),
+              SizedBox(height: 15),
               // Text("Welcome", style: MyStyle.medium5().s22),
               Text(
                 "Please Login Here",
                 style: MyStyle.medium5(Mytheme.brown).s25,
               ),
 
-              // SizedBox(height: 15),
               // Align(
               //   alignment: Alignment.centerLeft,
               //   child: Text("Mobile Number", style: MyStyle.medium5().s15),
@@ -109,11 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           const SizedBox(width: 8),
-                          Container(
-                            height: 24,
-                            width: 1,
-                            color: Colors.grey,  
-                          ),
+                          Container(height: 24, width: 1, color: Colors.grey),
                         ],
                       ),
                     ),
@@ -153,26 +178,25 @@ class _LoginScreenState extends State<LoginScreen> {
               CommonButton(
                 margin: 25,
                 onPressed: () {
-                  if (context
-                          .read<LoginModel>()
-                          .userIDController
-                          .text
-                          .trim()
-                          .isNotEmpty) {
-                            context.read<LoginModel>().callLoginApi();
-                            context.read<LoginModel>().onLoginSuccess = () {
-                             setState(() {
-                    showOtpSection = true;
-                  });
-                    }; 
-                  }
-                  // Helper.goToNext(Homescreen.route);
+                  // if (context
+                  //         .read<LoginModel>()
+                  //         .userIDController
+                  //         .text
+                  //         .trim()
+                  //         .isNotEmpty) {
+                  //           context.read<LoginModel>().callLoginApi();
+                  //           context.read<LoginModel>().onLoginSuccess = () {
+                  //            setState(() {
+                  //   showOtpSection = true;
+                  // });
+                  //   };
+                  // }
+                  Helper.goToNext(Homescreen.route);
                   // Helper.goToNext(DelegateScreen.route);
                   // Helper.goToNext(DignitariesScreen.route);
                 },
-                title: 'Send OTP',
+                title: !showOtpSection ? 'Send OTP' : 'Resend OTP',
               ),
-
 
               /// OTP Section
               Visibility(
@@ -180,12 +204,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 25,vertical: 13),
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 13,
+                      ),
                       color: Colors.grey.shade200,
                       height: 2,
-
                     ),
                     // SizedBox(height: 15),
                     // Align(
@@ -240,34 +265,50 @@ class _LoginScreenState extends State<LoginScreen> {
                       margin: 25,
                       onPressed: () {
                         if (context
-                          .read<LoginModel>()
-                          .otpController
-                          .text
-                          .trim()
-                          .isNotEmpty) {
-
-                         context.read<LoginModel>().callotpVarifyApi();
-                          }
-                        
+                            .read<LoginModel>()
+                            .otpController
+                            .text
+                            .trim()
+                            .isNotEmpty) {
+                          context.read<LoginModel>().callotpVarifyApi();
+                        }
                       },
                       title: "Verify OTP",
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.23),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Image.asset(
                   footer,
                   height: 30,
-                  width: 220,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   fit: BoxFit.fill,
                 ),
-              )
+              ),
             ],
           ),
         ),
+        // bottomSheet:Padding(
+        //   padding: const EdgeInsets.symmetric(vertical: 10),
+        //   child: Image.asset(
+        //             footer,
+        //             height: 30,
+        //             width: 300,
+        //             fit: BoxFit.fill,
+        //           ),
+        // ),
+        // bottomNavigationBar: BottomAppBar(
+        //   padding: EdgeInsets.symmetric(vertical: 10.0),
+        //   child:  Image.asset(
+        //           footer,
+        //           height: 30,
+        //           width: 220,
+        //           fit: BoxFit.fill,
+        //         ),
+        // ),
       ),
     );
   }

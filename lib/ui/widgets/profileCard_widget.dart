@@ -99,7 +99,7 @@ class ProfileContentWidget extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: GestureDetector(
-              onTap: () => viewMoreDialog(context, onViewMore),
+              onTap: () => viewMoreDialog(context, name, designation,  baseImg + imagePath, onViewMore),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -123,29 +123,118 @@ class ProfileContentWidget extends StatelessWidget {
     );
   }
 }
+// void viewMoreDialog(
+//   BuildContext context,
+//   String content 
+// ) {
+//   showDialog(
+//     context: context,
+//     barrierDismissible: true,
+//     builder: (_) {
+//       return Center(
+//         child: Material(
+//           borderRadius: BorderRadius.circular(10),
+//           color: Colors.white, 
+//           child: Container( 
+//             margin: EdgeInsets.all(20),
+//             padding: EdgeInsets.symmetric(vertical: 10),
+//             // child: Text("44",textAlign: TextAlign.center,)
+//             child: Text(
+//               content,
+//               textAlign: TextAlign.center, 
+//             ),
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 void viewMoreDialog(
   BuildContext context,
-  String content 
+  String name,
+  String designation,
+  String imagePath,
+  String content,
 ) {
   showDialog(
     context: context,
     barrierDismissible: true,
     builder: (_) {
-      return Center(
-        child: Material(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          child: Container( 
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.symmetric(vertical: 10),
-            // child: Text("44",textAlign: TextAlign.center,)
-            child: Text(
-              content,
-              textAlign: TextAlign.center, 
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        insetPadding: const EdgeInsets.all(16),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Close button
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: const Icon(Icons.close, size: 28),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+
+         ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+               imagePath,
+              errorBuilder: (context, error, stackTrace) {
+                return Icon(
+                  Icons.account_circle,
+                  color: Colors.grey,
+                  size: 35,
+                );
+              },
             ),
+          ),
+              const SizedBox(height: 12),
+
+              // Name
+              Text(
+                name,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              // Designation
+              Text(
+                designation,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.indigo,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+              const SizedBox(height: 8),
+              const Divider(),
+
+              // Scrollable content
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Text(
+                    content,
+                    textAlign: TextAlign.justify,
+                    style: const TextStyle(fontSize: 14, height: 1.4),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       );
     },
   );
 }
+

@@ -24,6 +24,7 @@ class HomeModel extends ViewModel {
   List<HomeIconData> get homeIconRespDto => _homeIconRespDto;
 
   set homeIconRespDto(value) {
+    if (!hasListeners) return;
     _homeIconRespDto = value;
     notifyListeners();
   }
@@ -36,6 +37,7 @@ class HomeModel extends ViewModel {
     callApi(() async {
       final repository = EndPointRepository(client: apiClient.init());
       final response = await repository.getHomeIconService();
+      if (!hasListeners) return;
       homeIconRespDto = response.data;  
       // log("upCTrainingResult length ${upCTrainingResult.length}");
     }, showLoading: false).whenComplete(() {
@@ -52,19 +54,21 @@ class HomeModel extends ViewModel {
   MarqueRespDto get marqueRespDto => _marqueRespDto;
 
   set marqueRespDto(value) {
+    if (!hasListeners) return;
     _marqueRespDto = value;
     notifyListeners();
   }
   
 
   Future<void> callMarqueApi( ) async {
-    // if (isLoading) return; 
+    if (isLoading) return; 
     if (isMarqueeLoading) return;
     isMarqueeLoading = true;
      callNotify();
     callApi(() async {
       final repository = EndPointRepository(client: apiClient.init());
       final response = await repository.getMarqueeService();
+      if (!hasListeners) return;
       marqueRespDto = response;  
       marquetext  = response.marquee ?? "";
       log("marqueRespDto   $marqueRespDto");
